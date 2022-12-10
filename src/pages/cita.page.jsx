@@ -19,7 +19,9 @@ export default function DashboardPage() {
     horario_cita: yup.date().required(),
     hora: yup.string().required(),
   });
-  const { citas, addCita, fetchCitas } = useCitaStore((state) => state);
+  const {
+    citas, addCita, fetchCitas, deleteCita,
+  } = useCitaStore((state) => state);
   const { doctores, fetchDoctores } = useDoctorStore((state) => state);
   const { clientes, fetchClientes } = useClienteStore((state) => state);
   const { mascotas, fetchMascotasById } = useMascotaStore((state) => state);
@@ -125,17 +127,31 @@ export default function DashboardPage() {
               <th>Descripcion</th>
               <th>Fecha de la cita</th>
               <th>Hora</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             { citas && citas.map((cita) => (
               <tr>
-                <td>{cita?.attributes?.cliente?.data?.attributes?.nombre_completo}</td>
-                <td>{cita?.attributes?.doctor?.data?.attributes?.nombre_completo}</td>
-                <td>{cita?.attributes?.mascota?.data?.attributes?.nombre}</td>
-                <td>{cita?.attributes?.descripcion}</td>
-                <td>{cita?.attributes?.horario_cita}</td>
-                <td>{cita?.attributes?.hora}</td>
+                <td>{cita?.attributes?.cliente?.data?.attributes?.nombre_completo ?? 'NA'}</td>
+                <td>{cita?.attributes?.doctor?.data?.attributes?.nombre_completo ?? 'NA'}</td>
+                <td>{cita?.attributes?.mascota?.data?.attributes?.nombre ?? 'NA'}</td>
+                <td>{cita?.attributes?.descripcion ?? 'NA'}</td>
+                <td>{cita?.attributes?.horario_cita ?? 'NA'}</td>
+                <td>{cita?.attributes?.hora ?? 'NA'}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => {
+                      deleteCita(cita?.id).then(() => {
+                        fetchCitas();
+                      });
+                    }}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             )) }
           </tbody>

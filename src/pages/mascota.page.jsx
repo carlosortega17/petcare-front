@@ -9,7 +9,9 @@ import useUserStore from '../stores/user.store';
 
 export default function MascotaPage() {
   const logout = useUserStore((state) => state.logout);
-  const { mascotas, fetchMascotas, addMascota } = useMascotaStore((state) => state);
+  const {
+    mascotas, fetchMascotas, addMascota, deleteMascota,
+  } = useMascotaStore((state) => state);
   const { clientes, fetchClientes } = useClienteStore((state) => state);
   const schema = yup.object({
     cliente: yup.number().required('El campo es requerido'),
@@ -90,15 +92,29 @@ export default function MascotaPage() {
               <th>Raza</th>
               <th>Edad</th>
               <th>Cliente</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             { mascotas && mascotas.map((mascota) => (
               <tr>
-                <td>{mascota?.attributes?.nombre}</td>
-                <td>{mascota?.attributes?.raza}</td>
-                <td>{mascota?.attributes?.edad}</td>
-                <td>{mascota?.attributes?.cliente?.data?.attributes?.nombre_completo}</td>
+                <td>{mascota?.attributes?.nombre ?? 'NA'}</td>
+                <td>{mascota?.attributes?.raza ?? 'NA'}</td>
+                <td>{mascota?.attributes?.edad ?? 'NA'}</td>
+                <td>{mascota?.attributes?.cliente?.data?.attributes?.nombre_completo ?? 'NA'}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => {
+                      deleteMascota(mascota?.id).then(() => {
+                        fetchMascotas();
+                      });
+                    }}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             )) }
           </tbody>

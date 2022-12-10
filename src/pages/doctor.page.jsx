@@ -5,7 +5,9 @@ import useDoctorStore from '../stores/doctor.store';
 
 export default function DoctorPage() {
   const logout = useUserStore((state) => state.logout);
-  const { doctores, fetchDoctores } = useDoctorStore((state) => state);
+  const {
+    doctores, fetchDoctores, // deleteDoctor
+  } = useDoctorStore((state) => state);
   useEffect(() => {
     fetchDoctores();
   }, []);
@@ -26,10 +28,25 @@ export default function DoctorPage() {
           <tbody>
             { doctores && doctores.map((doctor) => (
               <tr>
-                <td>{doctor?.nombre_completo}</td>
-                <td>{doctor?.email}</td>
-                <td>{doctor?.telefono}</td>
-                <td>{doctor?.direccion}</td>
+                <td>{doctor?.nombre_completo ?? 'NA'}</td>
+                <td>{doctor?.email ?? 'NA'}</td>
+                <td>{doctor?.telefono ?? 'NA'}</td>
+                <td>{doctor?.direccion ?? 'NA'}</td>
+                {/*
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => {
+                      deleteDoctor(doctor?.id).then(() => {
+                        fetchDoctores();
+                      });
+                    }}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+                  */}
               </tr>
             )) }
           </tbody>

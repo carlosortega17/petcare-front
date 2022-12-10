@@ -8,7 +8,9 @@ import useUserStore from '../stores/user.store';
 
 export default function ClientePage() {
   const logout = useUserStore((state) => state.logout);
-  const { clientes, fetchClientes, addCliente } = useClienteStore((state) => state);
+  const {
+    clientes, fetchClientes, addCliente, deleteCliente,
+  } = useClienteStore((state) => state);
   const schema = yup.object({
     nombre_completo: yup.string().required('El campo es requerido'),
     telefono: yup.number().required('El campo es requerido'),
@@ -71,6 +73,7 @@ export default function ClientePage() {
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Direccion</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +82,19 @@ export default function ClientePage() {
                 <td>{cliente?.attributes?.nombre_completo}</td>
                 <td>{cliente?.attributes?.telefono}</td>
                 <td>{cliente?.attributes?.direccion}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => {
+                      deleteCliente(cliente?.id).then(() => {
+                        fetchClientes();
+                      });
+                    }}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             )) }
           </tbody>
