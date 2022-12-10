@@ -12,6 +12,9 @@ const useDoctorStore = create(persist(
     addDoctor: async (form) => {
       await API.post('/doctors', form);
     },
+    deleteDoctor: async (id) => {
+      await API.delete(`/doctor/${id}`);
+    },
   }),
   {
     name: 'doctor-storage',

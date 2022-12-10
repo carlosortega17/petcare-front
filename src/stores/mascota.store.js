@@ -18,6 +18,9 @@ const useMascotaStore = create(persist(
         data: form,
       });
     },
+    deleteMascota: async (id) => {
+      await API.delete(`/mascotas/${id}`);
+    },
   }),
   {
     name: 'mascota-storage',

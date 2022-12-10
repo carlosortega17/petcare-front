@@ -130,12 +130,12 @@ export default function DashboardPage() {
           <tbody>
             { citas && citas.map((cita) => (
               <tr>
-                <td>{cita.attributes.cliente.data.attributes.nombre_completo}</td>
-                <td>{cita.attributes.doctor.data.attributes.nombre_completo}</td>
-                <td>{cita.attributes.mascota.data.attributes.nombre}</td>
-                <td>{cita.attributes.descripcion}</td>
-                <td>{cita.attributes.horario_cita}</td>
-                <td>{cita.attributes.hora}</td>
+                <td>{cita?.attributes?.cliente?.data?.attributes?.nombre_completo}</td>
+                <td>{cita?.attributes?.doctor?.data?.attributes?.nombre_completo}</td>
+                <td>{cita?.attributes?.mascota?.data?.attributes?.nombre}</td>
+                <td>{cita?.attributes?.descripcion}</td>
+                <td>{cita?.attributes?.horario_cita}</td>
+                <td>{cita?.attributes?.hora}</td>
               </tr>
             )) }
           </tbody>

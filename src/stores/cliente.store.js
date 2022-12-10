@@ -14,6 +14,9 @@ const useClienteStore = create(persist(
         data: form,
       });
     },
+    deleteCliente: async (id) => {
+      await API.delete(`/clientes/${id}`);
+    },
   }),
   {
     name: 'doctor-storage',

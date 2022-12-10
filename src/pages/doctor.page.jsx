@@ -26,10 +26,10 @@ export default function DoctorPage() {
           <tbody>
             { doctores && doctores.map((doctor) => (
               <tr>
-                <td>{doctor.nombre_completo}</td>
-                <td>{doctor.email}</td>
-                <td>{doctor.telefono}</td>
-                <td>{doctor.direccion}</td>
+                <td>{doctor?.nombre_completo}</td>
+                <td>{doctor?.email}</td>
+                <td>{doctor?.telefono}</td>
+                <td>{doctor?.direccion}</td>
               </tr>
             )) }
           </tbody>

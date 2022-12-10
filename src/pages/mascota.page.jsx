@@ -95,10 +95,10 @@ export default function MascotaPage() {
           <tbody>
             { mascotas && mascotas.map((mascota) => (
               <tr>
-                <td>{mascota.attributes.nombre}</td>
-                <td>{mascota.attributes.raza}</td>
-                <td>{mascota.attributes.edad}</td>
-                <td>{mascota.attributes.cliente.data.attributes.nombre_completo}</td>
+                <td>{mascota?.attributes?.nombre}</td>
+                <td>{mascota?.attributes?.raza}</td>
+                <td>{mascota?.attributes?.edad}</td>
+                <td>{mascota?.attributes?.cliente?.data?.attributes?.nombre_completo}</td>
               </tr>
             )) }
           </tbody>

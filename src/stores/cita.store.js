@@ -14,6 +14,9 @@ const useCitaStore = create(persist(
         data: form,
       });
     },
+    deleteCita: async (id) => {
+      await API.delete(`/citas/${id}`);
+    },
   }),
   {
     name: 'cita-storage',

@@ -76,9 +76,9 @@ export default function ClientePage() {
           <tbody>
             { clientes && clientes.map((cliente) => (
               <tr>
-                <td>{cliente.attributes.nombre_completo}</td>
-                <td>{cliente.attributes.telefono}</td>
-                <td>{cliente.attributes.direccion}</td>
+                <td>{cliente?.attributes?.nombre_completo}</td>
+                <td>{cliente?.attributes?.telefono}</td>
+                <td>{cliente?.attributes?.direccion}</td>
               </tr>
             )) }
           </tbody>
